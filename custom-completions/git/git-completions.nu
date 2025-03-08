@@ -172,8 +172,8 @@ def "nu-complete git switch" [] {
   use git-completion-utils *
   let current = (^git branch --show-current)  # Can be empty if in detached HEAD
   let local_branches = ^git branch --format '%(refname:short)' | lines | filter { $in != $current } | wrap value | insert description 'Local branch'
-  let remote_branches = (get-all-git-branches | extract-remote-branches-nonlocal-short $current) | wrap value | insert description 'Remote branch'
-  [...$local_branches, ...$remote_branches]
+  # let remote_branches = (get-all-git-branches | extract-remote-branches-nonlocal-short $current) | wrap value | insert description 'Remote branch'
+  $local_branches
 }
 
 def "nu-complete git checkout" [context: string, position?:int] {
